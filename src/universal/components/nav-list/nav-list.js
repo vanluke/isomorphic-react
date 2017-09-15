@@ -20,8 +20,8 @@ export const Li = styled.li`
     line-height: 4.375rem;
     color: ${grey};
     transition: all .2s ease-in;
-    border-bottom: ${props => props.active ? activeBorder : 0};
-    color: ${props => props.active ? green : grey};
+    border-bottom: ${props => (props.active ? activeBorder : 0)};
+    color: ${props => (props.active ? green : grey)};
     &:hover {
       color: #21D8A2;
     }

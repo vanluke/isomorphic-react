@@ -1,50 +1,53 @@
 import React, {Component} from 'react';
+import {Spinner} from 'universal/spinner';
 
-export const makeComponentAsync = (chunkName, getComponent) => class AsyncComponent extends Component {
-  static Component = null;
-  mounted = false;
+export const makeComponentAsync = (chunkName, getComponent) =>
+  class AsyncComponent extends Component {
+    static Component = null;
 
-  constructor(props) {
-    super(...props);
-  }
+    static load() {
+      return getComponent()
+        .then(c => (c.default ? c.default : c))
+        .then(cmp => (
+          (AsyncComponent.Component = cmp), (cmp)),
+        );
+    }
 
-  static load() {
-    return getComponent()
-      .then(c => c.default)
-      .then(cmp => (
-        (AsyncComponent.Component = cmp), (cmp))
-      );
-  }
+    constructor(props) {
+      super(...props);
+    }
 
-  state = {
-    Component: AsyncComponent.Component,
+    state = {
+      Component: AsyncComponent.Component,
+    };
+
+    componentWillMount() {
+      if (AsyncComponent.Component === null) {
+        AsyncComponent.load()
+          .then(cmp => this.mounted && this.setState({
+            Component: cmp,
+          }));
+      }
+    }
+
+    componentDidMount() {
+      this.mounted = true;
+    }
+
+    componentWillUnmount() {
+      this.mounted = false;
+    }
+
+    mounted = false;
+
+    render() {
+      const {Component: CMP} = this.state;
+
+      if (CMP) {
+        return (<CMP {...this.props} />);
+      }
+      return (<Spinner />);
+    }
   };
-
-  componentWillMount() {
-    if(AsyncComponent.Component === null) {
-      AsyncComponent.load()
-        .then(cmp => this.mounted && this.setState({
-          Component: cmp,
-        }));
-    }
-  }
-
-  componentDidMount() {
-    this.mounted = true;
-  }
-
-  componentWillUnmount() {
-    this.mounted = false;
-  }
-
-  render() {
-    const {Component} = this.state;
-
-    if(Component) {
-        return (<Component {...this.props} />);
-    }
-   return null;
-  }
-}
 
 export default makeComponentAsync;

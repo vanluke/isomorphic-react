@@ -1,4 +1,8 @@
-const makeFileLoader = function (args) {
+/* eslint-disable */
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
+/* eslint-enable */
+
+const makeFileLoader = function loader(args) {
   switch (args) {
     case 'woff':
       return {
@@ -71,35 +75,60 @@ export const js = {
       options: {
         babelrc: false,
         presets: [['es2015', {
-            modules: false
-					}],
-					'env',
-          'react',
-          'stage-2'
-        ]
+          modules: false,
+        }],
+        'env',
+        'react',
+        'stage-2',
+        ],
       },
       loader: 'babel-loader',
-    }
+    },
   ],
   exclude: /node_modules/,
 };
 
 export const jsSourceMap = {
-	test: /\.js$/,
-	enforce: 'pre',
-	use: [
-		'source-map-loader',
-	],
+  test: /\.js$/,
+  enforce: 'pre',
+  use: [
+    'source-map-loader',
+  ],
 };
 
 export const sass = {
   test: /\.scss/,
-  use: [
-    'style-loader',
-    'css-loader',
-    'postcss-loader',
-    'sass-loader',
-  ],
+  use: ExtractTextPlugin.extract({
+    fallback: 'style-loader',
+    use: [
+      'css-loader',
+      'postcss-loader',
+      'sass-loader',
+    ]}),
+};
+
+export const serverCss = {
+  test: /\.scss/,
+  use: ExtractTextPlugin.extract({
+    fallback: 'isomorphic-style-loader',
+    use: [
+      {
+        loader: 'css-loader',
+        options: {
+          modules: true,
+          importLoaders: 1,
+          localIdentName: '[hash:base64:10]',
+          sourceMap: true,
+        },
+      },
+      {
+        loader: 'postcss-loader',
+      },
+      {
+        loader: 'sass-loader',
+      },
+    ],
+  }),
 };
 
 export const json = {
@@ -124,8 +153,6 @@ export const eotLoader = makeFileLoader('eot');
 export const woffLoader = makeFileLoader('woff');
 export const ttfLoader = makeFileLoader('ttf');
 export const jpgLoader = makeFileLoader('jpg');
-
-console.log(ttfLoader);
 
 export default [jsSourceMap, eslint, js, json, sass,
   svgLoader, eotLoader, woffLoader,

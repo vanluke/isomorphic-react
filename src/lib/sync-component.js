@@ -2,15 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export const makeComponentSync = (chunkName, module) => {
-
   const Component = module.default ? module.default : module;
 
   const SyncComponent = (props) => {
-    if(props.staticContext.splitPoints) {
+    if (props.staticContext.splitPoints) {
       props.staticContext.splitPoints.push(chunkName);
     }
     return (<Component {...props} />);
-  }
+  };
 
   SyncComponent.propTypes = {
     staticContext: PropTypes.shape({
@@ -19,6 +18,6 @@ export const makeComponentSync = (chunkName, module) => {
   };
 
   return SyncComponent;
-}
+};
 
 export default makeComponentSync;

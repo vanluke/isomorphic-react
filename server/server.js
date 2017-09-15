@@ -1,23 +1,42 @@
 import express from 'express';
+import fs from 'fs';
 import path from 'path';
+/* eslint-disable */
 import sync from 'browser-sync';
+/* eslint-enable */
+import config from './config';
 
 const app = express();
-const port = 5000;
-const dev = 'development' === process.env.NODE_ENV;
+const port = config.get('port');
+const {
+  buildPath,
+  bundlePath,
+  indexFilePath,
+} = config.get('server');
+const dev = (process.env.NODE_ENV === 'development');
+/* eslint-disable */
+const {render} = require(bundlePath);
+/* eslint-enable */
+const ind = fs.readFileSync(indexFilePath, 'utf-8');
 
-app.use(express.static(path.join(__dirname, '..', 'build')));
-const {render} = require('../build/server.js');
+const srcReg = /<script\b[^>]*>([\s\S]*?)<\/script>/gm;
 
-app.use(render);
+const src = ind.match(srcReg).join('\r\n');
+
+app.use((req, res, next) => (req.url.indexOf('.') >= 0
+  ? next()
+  : render(req, res, src)),
+);
+
+app.use(express.static(path.join(__dirname, '..', buildPath)));
 
 app.listen(port, () => {
-  console.log('works', new Date().toString());
+  console.log(`listening on ${port}`, new Date().toString());
   return dev && sync({
-      files: ['src/**/*.{html,js,css}'],
-       open: false,
-       port,
-       proxy: `localhost:${port}`,
-       online: false,
-    });
+    files: ['src/**/*.{html,js,css}'],
+    open: false,
+    port,
+    proxy: `localhost:${port}`,
+    online: false,
+  });
 });

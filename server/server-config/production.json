@@ -1,0 +1,8 @@
+{
+  "port": "5000",
+  "server": {
+    "buildPath": "build",
+    "bundlePath": "../build/server.js",
+    "indexFilePath": "./build/index.html"
+  }
+}

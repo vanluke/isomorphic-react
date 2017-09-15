@@ -6,4 +6,4 @@ export const routes = [{
 }, {
   component: Test,
   path: '/test',
-}]
+}];

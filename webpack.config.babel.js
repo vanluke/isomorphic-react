@@ -1,8 +1,9 @@
 import webpack from 'webpack';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import path from 'path';
 import nodeExternals from 'webpack-node-externals';
 import getPlugins from './config/plugins';
-import loaders from './config/loaders';
+import loaders, {serverCss} from './config/loaders';
 
 const ENV = process.env.NODE_ENV || 'development';
 const DEV = ENV === 'development';
@@ -26,11 +27,12 @@ const entry = {
     ? ['./src/client.js']
     : ['webpack-dev-server/client?http://localhost:3000',
       'webpack/hot/dev-server',
-      './src/client.js']
+      './src/client.js'],
 };
 
 
 const clientConfig = {
+  name: 'client',
   entry,
   devtool: 'inline-source-map',
   output: {
@@ -68,13 +70,14 @@ const clientConfig = {
     ...plugins,
     new webpack.NormalModuleReplacementPlugin(
       /bundles.js/,
-      './async-bundles.js'
+      './async-bundles.js',
     ),
-  ]
+  ],
 };
 
 const serverConfig = {
-  entry: './src/server/server.js',
+  name: 'server',
+  entry: ['./src/server/server.js'],
   output: {
     path: `${__dirname}/build`,
     filename: 'server.js',
@@ -90,12 +93,22 @@ const serverConfig = {
 
   target: 'node',
   module: {
-    rules: loaders,
+    rules: [...loaders, {...serverCss}],
   },
-  externals: [nodeExternals()],
+  plugins: [
+    new ExtractTextPlugin({
+      filename: '[name].css',
+      disable: false,
+      allChunks: true,
+    }),
+  ],
+  externals: [nodeExternals({
+    // Load non-javascript files with extensions, presumably via loaders
+    whitelist: [/\.(?!(?:jsx?|json)$).{1,5}$/i],
+  })],
 };
 
 module.exports = [
   clientConfig,
-  serverConfig
+  serverConfig,
 ];
