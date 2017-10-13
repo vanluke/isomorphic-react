@@ -1,9 +1,35 @@
-import {Home, Test} from '../../bundles';
+import {
+  Root,
+  Home,
+  Test,
+  Accommodations,
+  NotFound,
+} from '../../bundles';
 
-export const routes = [{
-  component: Home,
-  path: '/home',
-}, {
-  component: Test,
-  path: '/test',
-}];
+export const routes = [
+  {
+    component: Root,
+    path: '/',
+    routes: [
+      {
+        exact: true,
+        path: '/home',
+        component: Home,
+      },
+      {
+        path: '/test',
+        component: Test,
+      },
+      {
+        path: '/accommodations',
+        component: Accommodations,
+      },
+    ],
+  },
+  {
+    path: '*',
+    component: NotFound,
+  },
+];
+
+export default routes;

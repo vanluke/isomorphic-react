@@ -7,17 +7,11 @@ import CleanWebpackPlugin from 'clean-webpack-plugin';
 import ChunkManifestPlugin from 'chunk-manifest-webpack-plugin';
 import autoprefixer from 'autoprefixer';
 import precss from 'precss';
+import WebpackPerformOnBuildPlugin from 'simple-webpack-clean-plugin';
 /* eslint-enable */
 
-export default function ({ENV, DEV, PROD}) {
-  return [
-    new HtmlWebpackPlugin({
-      template: './public/index.html',
-      inject: true,
-      minify: {removeAttributeQuotes: true},
-      filename: 'index.html',
-      chunks: true,
-    }),
+export default function ({ENV, DEV, PROD, isServer}) {
+  const plugins = [
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks: Infinity,
@@ -36,6 +30,12 @@ export default function ({ENV, DEV, PROD}) {
       verbose: true,
       dry: false,
     }),
+    new WebpackPerformOnBuildPlugin(
+      {
+        src: path.resolve(__dirname, '..', 'build/public'),
+        clearAll: false,
+        cleanCondition: file => ['manifest', 'vendor', 'polyfill', 'main'].filter(i => file.indexOf(i) >= 0).length,
+      }),
     new webpack.optimize.UglifyJsPlugin({
       include: /\.min\.js$/,
       sourceMap: true,
@@ -58,4 +58,12 @@ export default function ({ENV, DEV, PROD}) {
       __PROD__: JSON.stringify(PROD),
     }),
   ];
+
+  return !isServer ? plugins.concat(new HtmlWebpackPlugin({
+    template: './public/index.html',
+    inject: true,
+    minify: { removeAttributeQuotes: true },
+    filename: 'index.html',
+    chunks: true,
+  })) : plugins;
 }

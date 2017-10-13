@@ -5,14 +5,18 @@ import nodeExternals from 'webpack-node-externals';
 import getPlugins from './config/plugins';
 import loaders, {serverCss} from './config/loaders';
 
+const isServerRendering = process.env.TARGET_ENV === 'server';
 const ENV = process.env.NODE_ENV || 'development';
 const DEV = ENV === 'development';
 const PROD = ENV === 'production';
+
+console.log(process.env.TARGET_ENV, isServerRendering);
 
 const plugins = getPlugins({
   ENV,
   DEV,
   PROD,
+  isServer: isServerRendering,
 });
 
 const entry = {
@@ -24,10 +28,10 @@ const entry = {
     'prop-types',
   ],
   main: DEV
-    ? ['./src/client.js']
+    ? ['./src/client/render.js']
     : ['webpack-dev-server/client?http://localhost:3000',
       'webpack/hot/dev-server',
-      './src/client.js'],
+      './src/client/render.js'],
 };
 
 
@@ -36,7 +40,7 @@ const clientConfig = {
   entry,
   devtool: 'inline-source-map',
   output: {
-    path: `${__dirname}/build`,
+    path: `${__dirname}/build/public`,
     filename: '[name].[hash].js',
     publicPath: '',
     sourceMapFilename: '[name].[hash].js.map',
@@ -44,7 +48,7 @@ const clientConfig = {
   },
 
   devServer: {
-    contentBase: './build',
+    contentBase: './build/public',
     stats: {
       colors: true,
       timings: true,
@@ -77,7 +81,7 @@ const clientConfig = {
 
 const serverConfig = {
   name: 'server',
-  entry: ['./src/server/server.js'],
+  entry: ['./src/server/index.js'],
   output: {
     path: `${__dirname}/build`,
     filename: 'server.js',

@@ -30,8 +30,8 @@ const config = convict({
       format: '*',
       default: '',
     },
-    indexFilePath: {
-      doc: 'Server bundle path',
+    publicPath: {
+      doc: 'Public path',
       format: '*',
       default: '',
     },

@@ -1,9 +1,26 @@
-import styled from 'styled-components';
+import React from 'react';
+import PropTypes from 'prop-types';
+import {Link} from 'universal/components/link';
+import {Nav, List, Li} from './styled';
 
-export const Nav = styled.nav`
-  position: relative;
-  display: block;
-  left: 0;
-  right: 0;
-  width: 100%;
-`;
+export const Navigation = ({location}) => (<Nav>
+  <List>
+    <Li>
+      <Link to="/home">Home</Link>
+    </Li>
+    <Li>
+      <Link to="/test">Test</Link>
+    </Li>
+    <Li>
+      <Link to="/accommodations">Accommodations</Link>
+    </Li>
+  </List>
+</Nav>);
+
+Navigation.propTypes = {
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
+  }).isRequired,
+};
+
+export default Navigation;

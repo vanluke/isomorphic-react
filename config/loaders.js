@@ -1,5 +1,6 @@
 /* eslint-disable */
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import path from 'path';
 /* eslint-enable */
 
 const makeFileLoader = function loader(args) {
@@ -85,7 +86,7 @@ export const js = {
       loader: 'babel-loader',
     },
   ],
-  exclude: /node_modules/,
+  exclude: [/node_modules/, `${__dirname}/src/client.js`],
 };
 
 export const jsSourceMap = {

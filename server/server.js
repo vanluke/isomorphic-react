@@ -1,42 +1,39 @@
 import express from 'express';
-import fs from 'fs';
 import path from 'path';
-/* eslint-disable */
-import sync from 'browser-sync';
-/* eslint-enable */
+import bodyParser from 'body-parser';
 import config from './config';
+import {getScriptsFilesNames, sortScripts} from './helpers';
+import routes from './routes';
 
 const app = express();
+
+app.set('views', path.join(__dirname, '..', 'views'));
+app.set('view engine', 'pug');
+app.use(bodyParser.json());
+
 const port = config.get('port');
 const {
-  buildPath,
   bundlePath,
-  indexFilePath,
+  publicPath,
 } = config.get('server');
-const dev = (process.env.NODE_ENV === 'development');
+// const dev = (process.env.NODE_ENV === 'development');
+
+routes(app);
+
 /* eslint-disable */
-const {render} = require(bundlePath);
-/* eslint-enable */
-const ind = fs.readFileSync(indexFilePath, 'utf-8');
+const {render, handleRoutes} = require(bundlePath);
+// /* eslint-enable */
 
-const srcReg = /<script\b[^>]*>([\s\S]*?)<\/script>/gm;
+const files = sortScripts(getScriptsFilesNames(publicPath));
 
-const src = ind.match(srcReg).join('\r\n');
+const routesHandler = handleRoutes(render, files);
 
-app.use((req, res, next) => (req.url.indexOf('.') >= 0
-  ? next()
-  : render(req, res, src)),
-);
+app.use(express.static(path.join(__dirname, '..', 'build/public')));
 
-app.use(express.static(path.join(__dirname, '..', buildPath)));
+app.use('/', (req, res, next) => routesHandler({req, res, next}));
 
 app.listen(port, () => {
   console.log(`listening on ${port}`, new Date().toString());
-  return dev && sync({
-    files: ['src/**/*.{html,js,css}'],
-    open: false,
-    port,
-    proxy: `localhost:${port}`,
-    online: false,
-  });
 });
+
+export default app;
