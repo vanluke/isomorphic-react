@@ -15,53 +15,51 @@ const AccommodationForm = ({
   handleSubmit,
   submitting,
   invalid,
-}) => {
-  return (
-    <Form onSubmit={handleSubmit}>
-      <Field
-        name="title"
-        type="text"
-        component={FormField}
-        label="Title"
-        validate={[required, minLength5]}
-      />
-      <Field
-        name="picture"
-        type="url"
-        component={FormField}
-        label="Picture Url"
-        validate={[required, isLink]}
-      />
-      <Field
-        name="name"
-        type="text"
-        component={FormField}
-        label="Name"
-        validate={[required, minLength5]}
-      />
-      <Field
-        name="balance"
-        type="text"
-        component={FormField}
-        label="Balance"
-        validate={[required, isNumber]}
-      />
-      <Field
-        name="about"
-        type="text"
-        large
-        component={FormField}
-        label="About"
-      />
-      <Submit
-        type="Submit"
-        label="Submit"
-        error={error}
-        invalid={invalid}
-        submitting={submitting}
-      />
-    </Form>);
-}
+}) => (
+  <Form onSubmit={handleSubmit}>
+    <Field
+      name="title"
+      type="text"
+      component={FormField}
+      label="Title"
+      validate={[required, minLength5]}
+    />
+    <Field
+      name="picture"
+      type="url"
+      component={FormField}
+      label="Picture Url"
+      validate={[required, isLink]}
+    />
+    <Field
+      name="name"
+      type="text"
+      component={FormField}
+      label="Name"
+      validate={[required, minLength5]}
+    />
+    <Field
+      name="balance"
+      type="text"
+      component={FormField}
+      label="Balance"
+      validate={[required, isNumber]}
+    />
+    <Field
+      name="about"
+      type="text"
+      large
+      component={FormField}
+      label="About"
+    />
+    <Submit
+      type="Submit"
+      label="Submit"
+      error={error}
+      invalid={invalid}
+      submitting={submitting}
+    />
+  </Form>);
 
 AccommodationForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,

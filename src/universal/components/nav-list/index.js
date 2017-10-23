@@ -1,1 +1,1 @@
-export {List, Li} from './nav-list';
+export {List, Li} from './nav-list.styled';

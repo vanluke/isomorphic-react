@@ -26,7 +26,7 @@ export const createAccommodationFails = createAction(CREATE_ACCOMMODATION_FAILS)
 export const loadAccommodations = (action$, store, {accommodationService}) =>
   action$.ofType(LOAD_ACCOMMODATION_START)
     .mergeMap(() => accommodationService.getAccommodations()
-      .map(({response}) => Array.of(Object.values(response || {})))
+      .map(({response}) => Object.values(response || {}))
       .map(accommodations => loadAccommodationSuccess({accommodations}))
       .catch(error => Observable.of(loadAccommodationFails({
         error,

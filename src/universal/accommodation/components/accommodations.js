@@ -10,7 +10,13 @@ import {
   Layout,
 } from './accommodations-styled';
 
-export const Accommodations = ({isLoading, accommodations, addAccommodation, openCreateModal, createAccommodation}) => (
+const Accommodations = ({
+  isLoading,
+  accommodations,
+  addAccommodation,
+  openCreateModal,
+  createAccommodation,
+}) => (
   <Section>
     {openCreateModal && (<AccommodationModal
       addAccommodation={addAccommodation}
@@ -40,9 +46,6 @@ Accommodations.propTypes = {
   ).isRequired,
   createAccommodation: PropTypes.func.isRequired,
   addAccommodation: PropTypes.func.isRequired,
-  // accommodation: PropTypes.shape({
-  //   title: PropTypes.string,
-  // }),
   openCreateModal: PropTypes.bool.isRequired,
 }; 
 

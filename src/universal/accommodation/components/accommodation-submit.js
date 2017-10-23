@@ -7,7 +7,7 @@ import {
   SubmitGroup,
 } from './accommodations-styled';
 
-const Submit = ({ submitting, label, type, invalid}) => (
+const Submit = ({submitting, label, type, invalid}) => (
   <SubmitGroup>
     <SubmitButton
       type={type}

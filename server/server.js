@@ -1,6 +1,7 @@
 import express from 'express';
 import path from 'path';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 import config from './config';
 import {getScriptsFilesNames, sortScripts} from './helpers';
 import routes from './routes';
@@ -9,6 +10,7 @@ const app = express();
 
 app.set('views', path.join(__dirname, '..', 'views'));
 app.set('view engine', 'pug');
+app.use(cors());
 app.use(bodyParser.json());
 
 const port = config.get('port');
@@ -16,7 +18,6 @@ const {
   bundlePath,
   publicPath,
 } = config.get('server');
-// const dev = (process.env.NODE_ENV === 'development');
 
 routes(app);
 

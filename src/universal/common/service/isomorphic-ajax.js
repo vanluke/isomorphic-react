@@ -15,9 +15,9 @@ function ajax(options) {
       const xhr = new xhr2();// eslint-disable-line new-cap
       // DO NOT DO rejectUnauthorized: false IN PRODUCTION !
       const agent = new https
-        .Agent(process.env.NODE_ENV === 'production' 
-          ? {} 
-          : {rejectUnauthorized: false}
+        .Agent(process.env.NODE_ENV === 'production'
+          ? {}
+          : {rejectUnauthorized: false},
         );
       xhr.nodejsSet({httpsAgent: agent});
       return xhr;

@@ -1,7 +1,7 @@
 import {
   Root,
   Home,
-  Test,
+  About,
   Accommodations,
   NotFound,
 } from '../../bundles';
@@ -17,8 +17,8 @@ export const routes = [
         component: Home,
       },
       {
-        path: '/test',
-        component: Test,
+        path: '/about',
+        component: About,
       },
       {
         path: '/accommodations',

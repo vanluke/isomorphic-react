@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {withRouter} from 'react-router';
 import {Nav} from 'universal/components/nav';
-import {Container} from '../container/container';
+import {Container} from '../container';
 
 export const Landing = ({children, location}) => (<Container>
   <Nav location={location} />

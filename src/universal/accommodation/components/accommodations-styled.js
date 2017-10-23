@@ -14,7 +14,7 @@ const shadowHoverColor = 'rgba(0, 0, 0, .9)';
 
 function boxShadow(
   h = '0',
-  v = '1px', 
+  v = '1px',
   blur = '2px',
   spread = '0',
   color = shadowColor) {
@@ -291,7 +291,7 @@ export const SubmitButton = styled.button`
   transition: border-color .2s ease, box-shadow .2s ease;
   min-height: ${props => (props.large ? '20%' : 'auto')}; 
   &:focus {
-		outline: none;
+	  outline: none;
 		border-color: ${green};
 		box-shadow: 0 1px 0 0 ${green};
   }

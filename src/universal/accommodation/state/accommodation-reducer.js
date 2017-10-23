@@ -26,7 +26,7 @@ export const accomodationReducer = mapToReducer({
   [LOAD_ACCOMMODATION_SUCCESS]: (state, {payload}) => ({
     ...state,
     isLoading: false,
-    accommodations: payload.accommodations[0].slice(0, 20),
+    accommodations: payload.accommodations || [],
   }),
   [LOAD_ACCOMMODATION_FAILS]: (state, {payload}) => ({
     ...state,

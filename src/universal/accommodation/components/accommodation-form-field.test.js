@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import {shallow, mount} from 'enzyme';
 import Field from './accommodation-form-field';
 
 describe('Accommodation From Field', () => {
@@ -11,14 +11,24 @@ describe('Accommodation From Field', () => {
     input: {
       name: 'name',
     },
+    label: 'label',
     type: 'text',
-    label: 'Name'
   };
 
   it('should render', () => {
     const expected = 1;
     const wrapper = shallow(<Field {...props} />);
 
-    expect(wrapper).toHaveLength(1);
+    expect(wrapper).toHaveLength(expected);
+  });
+
+  it('should have props defined', () => {
+    const expected = {
+      ...props,
+      large: false,
+    };
+    const wrapper = mount(<Field {...props} />);
+
+    expect(wrapper.props()).toEqual(expected);
   });
 });

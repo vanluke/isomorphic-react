@@ -2,8 +2,10 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
-// import {ajax} from 'rxjs/observable/dom/ajax';
+import config from 'config';
 import {ajax} from './isomorphic-ajax';
+
+const baseUrl = `${config.api.root}/${config.api.version}`;
 
 export const request = ({
   data = {},
@@ -12,7 +14,7 @@ export const request = ({
 }) => ajax({
   method: type,
   body: data,
-  url: path,
+  url: `${baseUrl}${path}`,
   headers: {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
