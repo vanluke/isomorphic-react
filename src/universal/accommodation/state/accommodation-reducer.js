@@ -53,6 +53,7 @@ export const accomodationReducer = mapToReducer({
   [CREATE_ACCOMMODATION_SUCCESS]: (state, {payload}) => ({
     ...state,
     accommodations: [...payload.accommodations],
+    openCreateModal: !state.openCreateModal,
     isLoading: false,
   }),
 })(initState);

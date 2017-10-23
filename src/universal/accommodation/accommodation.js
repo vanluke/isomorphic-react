@@ -46,7 +46,7 @@ export const mapStateToProps = state => ({
 export const mapDispatchToProps = dispatch => ({
   initialize: () => dispatch(loadAccommodationStart()),
   createAccommodation: accommodation => dispatch(createAccommodationStart(accommodation)),
-  addAccommodation: accommodation => dispatch(openCreateAccommodationModal(accommodation)),
+  addAccommodation: () => dispatch(openCreateAccommodationModal()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withSSR(Accommodation, serverConnect));

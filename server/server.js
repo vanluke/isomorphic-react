@@ -11,6 +11,7 @@ const app = express();
 app.set('views', path.join(__dirname, '..', 'views'));
 app.set('view engine', 'pug');
 app.use(cors());
+app.options('*', cors());
 app.use(bodyParser.json());
 
 const port = config.get('port');

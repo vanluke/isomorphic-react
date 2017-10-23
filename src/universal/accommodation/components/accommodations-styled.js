@@ -300,6 +300,10 @@ export const SubmitButton = styled.button`
 		color: ${green};
     transform: translateY(-30px);
   }
+
+  &:not([value=""]):not(:focus) + ${Label} {
+    transform: translateY(-30px);
+  }
  `;
 
  export const InputGroup = styled.section`
