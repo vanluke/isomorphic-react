@@ -1,7 +1,7 @@
-import styled, {keyframes} from 'styled-components';
+import styled, {keyframes, css} from 'styled-components';
 import {
   white,
-  lightGray,
+  red,
   gray,
   darkGray,
   accent,
@@ -11,6 +11,28 @@ import {
 
 const shadowColor = 'rgba(0, 0, 0, .2)';
 const shadowHoverColor = 'rgba(0, 0, 0, .9)';
+
+const mobileBreakpoint = '40rem';
+const tabletBreakpoint = '768px';
+const desktopBreakpoint = '1224px';
+
+export const media = {
+  mobile: (...args) => css`
+    @media (min-width: ${mobileBreakpoint}) {
+      ${css(...args)}
+    }
+  `,
+  tablet: (...args) => css`
+    @media (min-width: ${tabletBreakpoint}) {
+      ${css(...args)}
+    }
+  `,
+  desktop: (...args) => css`
+    @media (min-width: ${desktopBreakpoint}) {
+      ${css(...args)}
+    }
+  `,
+};
 
 function boxShadow(
   h = '0',
@@ -27,9 +49,17 @@ function transition(property = 'all', duration = '.3s', timing = 'linear', delay
 
 export const Grid = styled.section`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr;
   grid-row-gap: 20px;
   grid-column-gap: 20px;
+
+  ${media.mobile`  
+    grid-template-columns: 1fr 1fr;
+  `}
+
+  ${media.desktop`  
+    grid-template-columns: 1fr 1fr 1fr;
+  `}
 `;
 
 export const Thumbnail = styled.picture`
@@ -52,7 +82,7 @@ export const Card = styled.div`
   background: ${white};
   min-width: 270px;
   height: 470px;
-  ${boxShadow()};
+  ${boxShadow('1px', '1px', '2px', '2px')};
   &:hover {
     ${boxShadow(0, '1px', '35px', 0, shadowHoverColor)};
     ${Thumbnail} {
@@ -99,7 +129,7 @@ export const Description = styled.p`
 export const Meta = styled.div`
   bottom: 12px;
   position: absolute;
-  color: ${lightGray};
+  color: ${darkGray};
 `;
 
 export const Price = styled.span`
@@ -112,15 +142,15 @@ export const Address = styled.div`
 `;
 
 export const AddAccommodation = styled.button`
-  color:#fff;
+  color: ${white};
   text-align: center;
   cursor: pointer;
-  font-size:24px;
+  font-size: 24px;
   border-radius: 4px;
   background-color:#d35400;
   border: none;
   width: 150px;
-  margin: 0 auto;
+  margin: 0 auto 5%;
   height: 50px;
   transition: all 0.5s;
   &:hover { 
@@ -156,15 +186,24 @@ export const Modal = styled.section`
   left: 0;
   background: #fff;
   z-index: 1;
+  overflow: scroll;
+  ${media.mobile`  
+    overflow: auto;
+  `}
 `;
 
 export const Section = styled.section`
 `;
 
 export const Layout = styled.section`
-  margin: 5% 0 0 0;
+  margin: 5% 1% 0;
   display: grid;
-  grid-template-columns: 20% 80%;
+  grid-template-columns: 100%;
+
+  
+  ${media.desktop`  
+    grid-template-columns: 20% 80%;
+  `}
 `;
 
 export const Close = styled.button`
@@ -269,27 +308,30 @@ export const SubmitButton = styled.button`
   &:active {
     letter-spacing: 2px;
   }
- `;
+`;
 
- export const Label = styled.label`
+export const Label = styled.label`
   position: absolute;
 	top: 30px;
 	left: 0;
 	color: ${blue};
 	font-weight: 300;
-	transition: transform .2s ease, color .2s ease;
+  transition: transform .2s ease, color .2s ease;
+  z-index: -1;
   &:hover {
 		cursor: text;
   }
- `;
+`;
 
- export const Input = styled.input`
-  border: none;
+export const Input = styled.input`
+  border: 0;
 	border-bottom: solid 1px ${gray};
 	width: 100%;
-	padding: 10px 0;
+  padding: 10px 0;
+  background: transparent;
   transition: border-color .2s ease, box-shadow .2s ease;
-  min-height: ${props => (props.large ? '20%' : 'auto')}; 
+  min-height: ${props => (props.large ? '20%' : 'auto')};
+
   &:focus {
 	  outline: none;
 		border-color: ${green};
@@ -304,19 +346,24 @@ export const SubmitButton = styled.button`
   &:not([value=""]):not(:focus) + ${Label} {
     transform: translateY(-30px);
   }
- `;
+`;
 
- export const InputGroup = styled.section`
+export const InputGroup = styled.section`
   position: relative;
   padding-top: 20px;
   margin-top: 20px;
- `;
+`;
 
- export const SubmitGroup = styled.section`
+export const SubmitGroup = styled.section`
   text-align: center;
-  padding: 4rem;
- `;
+  padding: 4rem 0;
+`;
 
- export const Form = styled.form`
+export const Form = styled.form`
   padding: 5rem;
- `;
+`;
+
+export const Error = styled.span`
+  color: ${red};
+  font-size: .7rem;
+`;

@@ -4,13 +4,14 @@ import {
   Input,
   InputGroup,
   Label,
+  Error,
 } from './accommodations-styled';
 
 const Field = ({input, label, type, large, meta: {touched, error}}) => (
   <InputGroup>
     <Input {...input} type={type} large={large} />
     <Label>{label}</Label>
-    {touched && error && <span>{error}</span>}
+    {touched && error && <Error>{error}</Error>}
   </InputGroup>
 );
 
