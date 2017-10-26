@@ -5,7 +5,7 @@ import Accommodation from './accommodation';
 import AccommodationModal from './accommodation-modal';
 import {
   AddAccommodation,
-} from './accommodations-styled';
+} from './accommodations.styled';
 
 describe('Accommodations', () => {
   const props = {

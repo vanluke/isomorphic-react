@@ -11,7 +11,7 @@ export const isNumber = value => (value && isNaN(Number(value)) ? 'Must be a num
 export const minValue = min => value =>
   (value && value < min ? `Must be at least ${min}` : undefined);
 
-const linkRegexp = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gm;  
+const linkRegexp = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gm; // eslint-disable-line  
 
 export const isLink = value => (!linkRegexp.test(value) ? 'Invalid url address' : undefined);
 

@@ -62,7 +62,7 @@ export default function ({ENV, DEV, PROD, isServer}) {
   return !isServer ? plugins.concat(new HtmlWebpackPlugin({
     template: './public/index.html',
     inject: true,
-    minify: { removeAttributeQuotes: true },
+    minify: {removeAttributeQuotes: true},
     filename: 'index.html',
     chunks: true,
   })) : plugins;

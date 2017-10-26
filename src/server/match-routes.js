@@ -3,7 +3,7 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/empty';
 import 'rxjs/add/operator/map';
-import 'rxjs/add/observable/fromPromise'
+import 'rxjs/add/observable/fromPromise';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/concat';
 import {ActionsObservable} from 'redux-observable';
@@ -24,4 +24,4 @@ export const handleRoutes = (render, src) => ({
     const {content, styles} = render({req, context, store});
     return res.render('index', {
       title: 'Isomorphic app', data: store.getState(), content, styles, src});
-});
+  });

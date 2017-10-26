@@ -23,16 +23,15 @@ export const List = styled.ul`
 `;
 
 export const Li = styled.li`
-    text-align: center;
-    display: block;
-    padding: 10px;
-    height: 3.125rem;
-    color: ${grey};
-    transition: all .2s ease-in;
-    border-bottom: ${props => (props.active ? activeBorder : 0)};
-    color: ${props => (props.active ? green : grey)};
+  text-align: center;
+  display: block;
+  padding: 10px;
+  height: 3.125rem;
+  transition: all .2s ease-in;
+  border-bottom: ${props => (props.active ? activeBorder : 0)};
+  color: ${props => (props.active ? green : grey)};
 
-    @media screen and (min-width: 40rem) {
-      display: inline-block;
-    }
+  @media screen and (min-width: 40rem) {
+    display: inline-block;
+  }
 `;

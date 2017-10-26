@@ -1,11 +1,11 @@
 import React from 'react';
 import {shallow, mount} from 'enzyme';
-import AccommodationSubmit from './accommodation-submit';
 import Done from 'universal/icons/done';
 import Close from 'universal/icons/close';
+import AccommodationSubmit from './accommodation-submit';
 import {
   SubmitButton,
-} from './accommodations-styled';
+} from './accommodations.styled';
 
 describe('Accommodation Submit', () => {
   const props = {

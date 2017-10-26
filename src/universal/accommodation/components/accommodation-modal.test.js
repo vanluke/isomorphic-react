@@ -1,19 +1,17 @@
 import React from 'react';
 import {shallow, mount} from 'enzyme';
-
 import TestContainer from 'universal/utils/helpers-test';
 import AccommodationModal from './accommodation-modal';
-import Form from './accommodation-form';
 import {
   Close,
   ModalTitle,
-} from './accommodations-styled';
+} from './accommodations.styled';
 import AccommodationForm from './accommodation-redux-form';
 
 describe('Accommodation Create Modal', () => {
   // const ReduxForm = reduxForm({ form: 'accommodation-form-test' })(Form);
   const props = {
-    addAccommodation: jest.fn(), 
+    addAccommodation: jest.fn(),
     onSubmit: jest.fn(),
   };
 
@@ -42,7 +40,7 @@ describe('Accommodation Create Modal', () => {
     const wrapper = mount(<TestContainer>
       <AccommodationModal {...modalProps} />
     </TestContainer>).find(Close);
-    
+
     wrapper.simulate('click');
 
     expect(modalProps.addAccommodation).toHaveBeenCalled();

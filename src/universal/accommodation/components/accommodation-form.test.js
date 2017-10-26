@@ -45,7 +45,6 @@ describe('Accommodation From', () => {
     const wrapper = mount(<TestContainer>
       <ReduxForm {...props} />
     </TestContainer>);
-   
     wrapper.find(Form).find(Submit).find('button')
       .simulate('submit');
 

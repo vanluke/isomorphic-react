@@ -9,7 +9,7 @@ import {
   Description,
   Meta,
   Price,
-} from './accommodations-styled';
+} from './accommodations.styled';
 
 const Accommodation = ({
   name,
@@ -39,6 +39,6 @@ Accommodation.propTypes = {
   about: PropTypes.string.isRequired,
   balance: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-}; 
+};
 
 export default Accommodation;

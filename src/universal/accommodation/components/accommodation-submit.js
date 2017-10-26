@@ -5,7 +5,7 @@ import Close from 'universal/icons/close';
 import {
   SubmitButton,
   SubmitGroup,
-} from './accommodations-styled';
+} from './accommodations.styled';
 
 const Submit = ({submitting, label, type, invalid}) => (
   <SubmitGroup>

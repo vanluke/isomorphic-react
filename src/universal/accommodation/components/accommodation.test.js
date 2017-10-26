@@ -7,7 +7,7 @@ import {
   Subtitle,
   Description,
   Price,
-} from './accommodations-styled';
+} from './accommodations.styled';
 
 describe('Accommodation', () => {
   const props = {

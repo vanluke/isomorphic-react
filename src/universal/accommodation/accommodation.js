@@ -13,7 +13,7 @@ import {
   openCreateAccommodationModal,
 } from './state';
 
-export class Accommodation extends PureComponent {
+class Accommodation extends PureComponent {
   componentDidMount() {
     const {initialize} = this.props;
     initialize();

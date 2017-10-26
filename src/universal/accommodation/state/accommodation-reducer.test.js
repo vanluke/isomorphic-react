@@ -22,7 +22,7 @@ describe('Accommodation reducer', () => {
 
     expect(actual).toEqual(expected);
   });
-  
+
   it('should handle LOAD_ACCOMMODATION_SUCCESS', () => {
     const expected = {
       ...initState,

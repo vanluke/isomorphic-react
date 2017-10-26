@@ -1,4 +1,12 @@
-import styled, {keyframes, css} from 'styled-components';
+import styled from 'styled-components';
+import {
+  Spinning,
+  media,
+  boxShadow,
+  transition,
+  shadowColor,
+  shadowHoverColor,
+} from 'universal/utils/styles';
 import {
   white,
   red,
@@ -9,54 +17,14 @@ import {
   blue,
 } from 'universal/styles/palette';
 
-const shadowColor = 'rgba(0, 0, 0, .2)';
-const shadowHoverColor = 'rgba(0, 0, 0, .9)';
-
-const mobileBreakpoint = '40rem';
-const tabletBreakpoint = '768px';
-const desktopBreakpoint = '1224px';
-
-export const media = {
-  mobile: (...args) => css`
-    @media (min-width: ${mobileBreakpoint}) {
-      ${css(...args)}
-    }
-  `,
-  tablet: (...args) => css`
-    @media (min-width: ${tabletBreakpoint}) {
-      ${css(...args)}
-    }
-  `,
-  desktop: (...args) => css`
-    @media (min-width: ${desktopBreakpoint}) {
-      ${css(...args)}
-    }
-  `,
-};
-
-function boxShadow(
-  h = '0',
-  v = '1px',
-  blur = '2px',
-  spread = '0',
-  color = shadowColor) {
-  return `box-shadow: ${h} ${v} ${blur} ${spread} ${color}`;
-}
-
-function transition(property = 'all', duration = '.3s', timing = 'linear', delay = '0s') {
-  return `transition: ${property} ${duration} ${timing} ${delay}`;
-}
-
 export const Grid = styled.section`
   display: grid;
   grid-template-columns: 1fr;
   grid-row-gap: 20px;
   grid-column-gap: 20px;
-
   ${media.mobile`  
     grid-template-columns: 1fr 1fr;
   `}
-
   ${media.desktop`  
     grid-template-columns: 1fr 1fr 1fr;
   `}
@@ -83,8 +51,10 @@ export const Card = styled.div`
   min-width: 270px;
   height: 470px;
   ${boxShadow('1px', '1px', '2px', '2px')};
+
   &:hover {
     ${boxShadow(0, '1px', '35px', 0, shadowHoverColor)};
+
     ${Thumbnail} {
       img {
         transform: scale(1.1);
@@ -100,7 +70,7 @@ export const Content = styled.article`
   background: ${white};
   width: 100%;
   box-sizing: border-box;
-  ${transition('all', '.3s', 'cubic-bezier(.37, .75, .61, 1.05))')};
+  ${transition('all', '.3s', 'cubic-bezier(.37, .75, .61, 1.05)')};
 `;
 
 export const Title = styled.h1`
@@ -156,7 +126,7 @@ export const AddAccommodation = styled.button`
   &:hover { 
     span {
       padding-right: 25px;
-      &:after {
+      &::after {
         opacity: 1;
         right: 0;
       }
@@ -167,7 +137,7 @@ export const AddAccommodation = styled.button`
     display: inline-block;
     position: relative;
     transition: 0.5s;
-    &:after {
+    &::after {
       content: '»';
       position: absolute;
       opacity: 0;
@@ -187,7 +157,7 @@ export const Modal = styled.section`
   background: #fff;
   z-index: 1;
   overflow: scroll;
-  ${media.mobile`  
+  ${media.mobile` 
     overflow: auto;
   `}
 `;
@@ -204,37 +174,6 @@ export const Layout = styled.section`
   ${media.desktop`  
     grid-template-columns: 20% 80%;
   `}
-`;
-
-export const Close = styled.button`
-  position: relative;
-  border: none;
-  background: transparent;
-  height: 30px; 
-  width: 30px;
-  margin-right: 30px;
-
-  &::before, &::after {
-    content: '';
-    border-style: solid;
-    border-color: #ccc;
-    border-width: 0px 3px 3px 0px;
-    height: 30px; 
-    width: 30px;
-    position: absolute;
-    top: -10px;
-    transform: rotate(45deg);
-  }
-
-  &::after {
-    border-width: 3px 0px 0px 3px;
-    top: 38px;
-  }
-
-  &::before {
-    border-width: 0px 3px 3px 0px;
-    top: -5px;
-  }
 `;
 
 export const ModalHeader = styled.div`
@@ -254,15 +193,6 @@ export const ModalTitle = styled.h1`
   color: ${darkGray};
 `;
 
-const SubmitButtonAnimation = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}`
-
 export const SubmitButton = styled.button`
   height: 40px;
   text-align: center;
@@ -281,7 +211,7 @@ export const SubmitButton = styled.button`
     if (props.wait) {
       return `
         border-left-color: ${green};
-        animation: ${SubmitButtonAnimation} 2s 0.25s linear infinite;
+        animation: ${Spinning} 2s 0.25s linear infinite;
         &:after {
           content: '';
         }
@@ -366,4 +296,35 @@ export const Form = styled.form`
 export const Error = styled.span`
   color: ${red};
   font-size: .7rem;
+`;
+
+export const Close = styled.button`
+  position: relative;
+  border: none;
+  background: transparent;
+  height: 30px; 
+  width: 30px;
+  margin-right: 30px;
+
+  &::before, &::after {
+    content: '';
+    border-style: solid;
+    border-color: #ccc;
+    border-width: 0 3px 3px 0;
+    height: 30px; 
+    width: 30px;
+    position: absolute;
+    top: -10px;
+    transform: rotate(45deg);
+  }
+
+  &::after {
+    border-width: 3px 0 0 3px;
+    top: 38px;
+  }
+
+  &::before {
+    border-width: 0 3px 3px 0;
+    top: -5px;
+  }
 `;

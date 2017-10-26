@@ -4,7 +4,7 @@ import {withRouter} from 'react-router';
 import {Nav} from 'universal/components/nav';
 import {Container} from '../container';
 
-export const Landing = ({children, location}) => (<Container>
+const Landing = ({children, location}) => (<Container>
   <Nav location={location} />
   {children}
 </Container>);

@@ -6,7 +6,7 @@ import {
   Close,
   ModalHeader,
   ModalTitle,
-} from './accommodations-styled';
+} from './accommodations.styled';
 
 const AccommodationModal = ({addAccommodation, onSubmit}) => (<Modal>
   <ModalHeader>
@@ -17,8 +17,8 @@ const AccommodationModal = ({addAccommodation, onSubmit}) => (<Modal>
 </Modal>);
 
 AccommodationModal.propTypes = {
-  addAccommodation: PropTypes.func.isRequired, 
-  onSubmit: PropTypes.func.isRequired, 
+  addAccommodation: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
 
 export default AccommodationModal;

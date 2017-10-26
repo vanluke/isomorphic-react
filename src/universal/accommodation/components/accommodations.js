@@ -8,7 +8,7 @@ import {
   Section,
   AddAccommodation,
   Layout,
-} from './accommodations-styled';
+} from './accommodations.styled';
 
 const Accommodations = ({
   isLoading,
@@ -47,7 +47,7 @@ Accommodations.propTypes = {
   createAccommodation: PropTypes.func.isRequired,
   addAccommodation: PropTypes.func.isRequired,
   openCreateModal: PropTypes.bool.isRequired,
-}; 
+};
 
 Accommodations.defaultProps = {
   accommodation: undefined,

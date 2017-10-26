@@ -17,5 +17,5 @@ export const accommodationService = {
       type: 'post',
       data: accommodation,
     });
-  }
+  },
 };

@@ -30,7 +30,7 @@ describe('Accommodation service', () => {
     };
 
     service.request.mockImplementation(() => [accommodation]);
-    
+
     const actual = await accommodationService
       .createAccommodation(accommodation);
 
