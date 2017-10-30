@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Close} from 'universal/components/close';
 import AccommodationForm from './accommodation-redux-form';
 import {
   Modal,
-  Close,
   ModalHeader,
   ModalTitle,
-} from './accommodations.styled';
+} from './accommodation-modal.styled';
 
 const AccommodationModal = ({addAccommodation, onSubmit}) => (<Modal>
   <ModalHeader>

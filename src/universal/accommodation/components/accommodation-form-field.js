@@ -5,7 +5,7 @@ import {
   InputGroup,
   Label,
   Error,
-} from './accommodations.styled';
+} from './accommodation-form.styled';
 
 const Field = ({input, label, type, large, meta: {touched, error}}) => (
   <InputGroup>

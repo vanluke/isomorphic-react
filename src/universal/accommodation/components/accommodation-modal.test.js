@@ -1,11 +1,11 @@
 import React from 'react';
 import {shallow, mount} from 'enzyme';
 import TestContainer from 'universal/utils/helpers-test';
+import {Close} from 'universal/components/close';
 import AccommodationModal from './accommodation-modal';
 import {
-  Close,
   ModalTitle,
-} from './accommodations.styled';
+} from './accommodation-modal.styled';
 import AccommodationForm from './accommodation-redux-form';
 
 describe('Accommodation Create Modal', () => {

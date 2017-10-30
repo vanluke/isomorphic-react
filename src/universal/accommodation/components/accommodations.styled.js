@@ -53,14 +53,14 @@ export const Card = styled.div`
   ${boxShadow('1px', '1px', '2px', '2px')};
 
   &:hover {
-    ${boxShadow(0, '1px', '35px', 0, shadowHoverColor)};
-
-    ${Thumbnail} {
+    &${Thumbnail} {
       img {
         transform: scale(1.1);
         opacity: .6;
       }
     }
+
+    ${boxShadow(0, '1px', '35px', 0, shadowHoverColor)};
   }
 `;
 
@@ -117,214 +117,50 @@ export const AddAccommodation = styled.button`
   cursor: pointer;
   font-size: 24px;
   border-radius: 4px;
-  background-color:#d35400;
+  background-color: #d35400;
   border: none;
   width: 150px;
   margin: 0 auto 5%;
   height: 50px;
-  transition: all 0.5s;
-  &:hover { 
+  transition: all .5s;
+
+  &:hover {
     span {
       padding-right: 25px;
+
       &::after {
         opacity: 1;
         right: 0;
       }
     }
   }
+
   span {
     cursor: pointer;
     display: inline-block;
     position: relative;
-    transition: 0.5s;
+    transition: .5s;
+
     &::after {
       content: '»';
       position: absolute;
       opacity: 0;
       top: 0;
       right: -20px;
-      transition: 0.5s;
+      transition: .5s;
     }
   }
 `;
 
-export const Modal = styled.section`
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background: #fff;
-  z-index: 1;
-  overflow: scroll;
-  ${media.mobile` 
-    overflow: auto;
-  `}
-`;
-
 export const Section = styled.section`
+  position: relative;
 `;
 
 export const Layout = styled.section`
   margin: 5% 1% 0;
   display: grid;
   grid-template-columns: 100%;
-
-  
   ${media.desktop`  
     grid-template-columns: 20% 80%;
   `}
-`;
-
-export const ModalHeader = styled.div`
-  position: relative;
-  height: 80px;
-  width: 100%;
-  display: flex;
-  border-bottom: 1px solid ${shadowColor};
-`;
-
-export const ModalTitle = styled.h1`
-  font-size: 24px;
-  flex-grow: 1;
-  text-align: center;
-  flex-basis: auto;
-  line-height: 15px;
-  color: ${darkGray};
-`;
-
-export const SubmitButton = styled.button`
-  height: 40px;
-  text-align: center;
-  width: ${props => (props.wait ? '40px' : '130px')};
-  border-radius:40px;
-  background: ${props => (props.disabled ? accent : white)};
-  border-width: ${props => (props.wait ? '3px' : '2px')};
-  ${(props) => {
-    if (props.validate) {
-      return `
-          font-size: 0;
-          color: white;
-          background: ${green};
-        `;
-    }
-    if (props.wait) {
-      return `
-        border-left-color: ${green};
-        animation: ${Spinning} 2s 0.25s linear infinite;
-        &:after {
-          content: '';
-        }
-        &:hover {
-          color: ${green};
-          background: white;
-        }
-      `;
-    }
-    return '';
-  }};
-  border-style: solid;
-  ${props => (props.wait ? '' : `border-color: ${green}`)};
-  color: ${green};
-  letter-spacing:1px;
-  text-shadow: 0;
-  font-size: ${props => (props.wait ? '0' : '12px')};
-  cursor: pointer;
-  transition: all 0.25s ease;
-  &:hover {
-    color: ${white};
-    background: ${green};
-  }
-  &:active {
-    letter-spacing: 2px;
-  }
-`;
-
-export const Label = styled.label`
-  position: absolute;
-	top: 30px;
-	left: 0;
-	color: ${blue};
-	font-weight: 300;
-  transition: transform .2s ease, color .2s ease;
-  z-index: -1;
-  &:hover {
-		cursor: text;
-  }
-`;
-
-export const Input = styled.input`
-  border: 0;
-	border-bottom: solid 1px ${gray};
-	width: 100%;
-  padding: 10px 0;
-  background: transparent;
-  transition: border-color .2s ease, box-shadow .2s ease;
-  min-height: ${props => (props.large ? '20%' : 'auto')};
-
-  &:focus {
-	  outline: none;
-		border-color: ${green};
-		box-shadow: 0 1px 0 0 ${green};
-  }
-
-  &:focus + ${Label} {
-		color: ${green};
-    transform: translateY(-30px);
-  }
-
-  &:not([value=""]):not(:focus) + ${Label} {
-    transform: translateY(-30px);
-  }
-`;
-
-export const InputGroup = styled.section`
-  position: relative;
-  padding-top: 20px;
-  margin-top: 20px;
-`;
-
-export const SubmitGroup = styled.section`
-  text-align: center;
-  padding: 4rem 0;
-`;
-
-export const Form = styled.form`
-  padding: 5rem;
-`;
-
-export const Error = styled.span`
-  color: ${red};
-  font-size: .7rem;
-`;
-
-export const Close = styled.button`
-  position: relative;
-  border: none;
-  background: transparent;
-  height: 30px; 
-  width: 30px;
-  margin-right: 30px;
-
-  &::before, &::after {
-    content: '';
-    border-style: solid;
-    border-color: #ccc;
-    border-width: 0 3px 3px 0;
-    height: 30px; 
-    width: 30px;
-    position: absolute;
-    top: -10px;
-    transform: rotate(45deg);
-  }
-
-  &::after {
-    border-width: 3px 0 0 3px;
-    top: 38px;
-  }
-
-  &::before {
-    border-width: 0 3px 3px 0;
-    top: -5px;
-  }
 `;

@@ -5,7 +5,7 @@ import Close from 'universal/icons/close';
 import AccommodationSubmit from './accommodation-submit';
 import {
   SubmitButton,
-} from './accommodations.styled';
+} from './accommodation-submit.styled';
 
 describe('Accommodation Submit', () => {
   const props = {

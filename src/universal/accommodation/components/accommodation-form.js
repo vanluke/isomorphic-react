@@ -5,7 +5,7 @@ import {required, minLength, isNumber, isLink} from 'universal/common/redux-form
 import Submit from './accommodation-submit';
 import {
   Form,
-} from './accommodations.styled';
+} from './accommodation-form.styled';
 import FormField from './accommodation-form-field';
 
 const minLength5 = minLength(5);

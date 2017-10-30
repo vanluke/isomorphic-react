@@ -6,7 +6,9 @@
   ],
   "rules": {
     "number-leading-zero": "never",
-    "declaration-block-no-redundant-longhand-properties": "false"
+    "declaration-block-no-redundant-longhand-properties": null,
+    "selector-type-case": null,
+    "selector-type-no-unknown": null
   },
   "syntax": "scss"
 }
