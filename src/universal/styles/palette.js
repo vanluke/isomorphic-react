@@ -1,0 +1,10 @@
+export const red = '#fc0a0a';
+export const white = '#fff';
+export const darkGrey = '#394044';
+export const dark = '#5C676E';
+export const green = '#21D8A2';
+export const grey = '#ECECED';
+export const accent = '#e2315a';
+export const gray = '#F0F0F0';
+export const lightGray = '#F2F2F2';
+export const blue = '#aaa';
