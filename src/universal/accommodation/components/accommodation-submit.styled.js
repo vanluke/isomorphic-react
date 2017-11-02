@@ -1,4 +1,11 @@
+
 import styled from 'styled-components';
+import {Spinning} from 'universal/utils/styles'
+import {
+  green,
+  accent,
+  white,
+} from 'universal/styles/palette';
 
 export const SubmitButton = styled.button`
   height: 40px;

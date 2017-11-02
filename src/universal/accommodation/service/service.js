@@ -1,3 +1,4 @@
+import uuid from 'performance-uuid';
 import {request} from 'universal/common/service';
 import config from 'config';
 
@@ -15,7 +16,11 @@ export const accommodationService = {
       errorMessage: 'Can not create accommodation',
       path: url,
       type: 'post',
-      data: accommodation,
+      data: {
+        ...accommodation,
+        id: (accommodation.id ? accommodation.id : uuid()),
+        guid: (accommodation.guid ? accommodation.guid : uuid()),
+      },
     });
   },
 };

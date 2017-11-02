@@ -1,3 +1,4 @@
+import uuid from 'performance-uuid';
 import config from 'config';
 import {accommodationService} from './service';
 
@@ -27,6 +28,8 @@ describe('Accommodation service', () => {
   it('should createAccommodation create accommodation', async () => {
     const accommodation = {
       name: 'name',
+      id: uuid(),
+      guid: uuid(),
     };
 
     service.request.mockImplementation(() => [accommodation]);
@@ -42,6 +45,8 @@ describe('Accommodation service', () => {
   it('should getAccommodations call request with prop', async () => {
     const accommodation = {
       name: 'name',
+      id: uuid(),
+      guid: uuid(),
     };
 
     service.request.mockImplementation(() => [accommodation]);
@@ -60,6 +65,8 @@ describe('Accommodation service', () => {
   it('should createAccommodation call request with prop', async () => {
     const accommodation = {
       name: 'name',
+      id: uuid(),
+      guid: uuid(),
     };
 
     service.request.mockImplementation(() => [accommodation]);
