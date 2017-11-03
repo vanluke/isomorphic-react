@@ -12,6 +12,7 @@ export const makeComponentAsync = (chunkName, getComponent) =>
           (AsyncComponent.Component = cmp), (cmp)),
         );
     }
+    static propTypes = Component.propTypes;
     displayName = Component.name || 'Component';
 
     constructor(props) {

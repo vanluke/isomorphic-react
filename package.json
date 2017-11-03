@@ -1,14 +1,14 @@
 {
-  "name": "server-side-express",
+  "name": "isomorphic-app",
   "version": "0.0.1",
-  "description": "Server side rendering",
+  "description": "Isomorphic-App",
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=development node_modules/.bin/jest",
     "webpack:server": "node_modules/.bin/webpack",
     "build": "NODE_ENV=development node_modules/.bin/webpack --config webpack.config.babel.js",
     "start:server": "node_modules/.bin/nodemon --inspect server",
-    "dev:server": "NODE_ENV=development TARGET_ENV=server npm run webpack:server -- --watch --debug & NODE_ENV=development npm run start:server",
+    "dev:server": "NODE_ENV=development TARGET_ENV=server npm run webpack:server -- --watch --debug & NODE_ENV=development TARGET_ENV=server npm run start:server",
     "dev:client": "NODE_ENV=development npm run start:server & NODE_ENV=development npm run start:client",
     "start:client": "NODE_ENV=development node_modules/.bin/webpack-dev-server --port=3000 --inline --hot",
     "storybook": "node_modules/.bin/start-storybook -p 9001 -c .storybook",

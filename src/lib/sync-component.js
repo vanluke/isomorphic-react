@@ -15,6 +15,7 @@ export const makeComponentSync = (chunkName, module) => {
   SyncComponent.serverConnect = Component.epics;
 
   SyncComponent.propTypes = {
+    ...Component.propTypes,
     staticContext: PropTypes.shape({
       splitPoints: PropTypes.arrayOf(PropTypes.string),
     }).isRequired,

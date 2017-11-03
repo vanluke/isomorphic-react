@@ -10,7 +10,7 @@ const ENV = process.env.NODE_ENV || 'development';
 const DEV = ENV === 'development';
 const PROD = ENV === 'production';
 
-console.log(process.env.TARGET_ENV, isServerRendering);
+console.log(process.env.TARGET_ENV, isServerRendering, 'xx');
 
 const plugins = getPlugins({
   ENV,
